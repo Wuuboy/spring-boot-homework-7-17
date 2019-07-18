@@ -1,0 +1,1 @@
+delete from procurator where justice_name = '王五';
