@@ -1,0 +1,14 @@
+ create table case_detail (id bigint not null, objective_detail varchar(255) not null, subjective_detail varchar(255) not null, primary key (id));
+ create table main_case (id bigint not null, case_name varchar(128) not null, case_time bigint not null, case_detail_id bigint, procuratorate_id bigint, primary key (id));
+ create table procurator (id bigint not null, age integer, justice_name varchar(255) not null, primary key (id));
+ create table procuratorate (id bigint not null, procuratorate_name varchar(255) not null, primary key (id));
+ create table procuratorate_procurators (procuratorate_id bigint not null, procurators_id bigint not null);
+ alter table procuratorate drop constraint if exists UK_6t0xvkybcdls6q7bvv5j000x0;
+ alter table procuratorate add constraint UK_6t0xvkybcdls6q7bvv5j000x0 unique (procuratorate_name);
+ alter table procuratorate_procurators drop constraint if exists UK_avfmrw88o20jiuri8l75f4f37;
+ alter table procuratorate_procurators add constraint UK_avfmrw88o20jiuri8l75f4f37 unique (procurators_id);
+ create sequence hibernate_sequence start with 1 increment by 1;
+ alter table main_case add constraint FKjr3t0athy7aimix90x82mqa1o foreign key (case_detail_id) references case_detail;
+ alter table main_case add constraint FKjpuj75ygvqxu5ieex8mt7mi5x foreign key (procuratorate_id) references procuratorate;
+ alter table procuratorate_procurators add constraint FK62g9jle5jl2jps60aimrp5oy7 foreign key (procurators_id) references procurator;
+ alter table procuratorate_procurators add constraint FK2215vsjflb61v4kgtpt14buxq foreign key (procuratorate_id) references procuratorate;
